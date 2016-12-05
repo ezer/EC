@@ -1,0 +1,1 @@
+cmd = LUX_17C_ZT10_v3.fasta fasta homer -find FL2_PBM.motif

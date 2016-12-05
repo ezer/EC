@@ -123,5 +123,19 @@ luxTargets_de=as.character(luxTargets[which(as.character(luxTargets[,1]) %in% co
 lux17CTargets=as.character(read.table("geneTargets/LUX_targetgenes_17C_TP3.txt")[,1])
 lux17CTargets_de=as.character(lux17CTargets)[which(as.character(lux17CTargets) %in% compileTopGenes)]
 
+####input for venn diagram:
+#do the binary table trick
+uniqueGenes=unique(c(lux17CTargets_de,  luxTargets_de, elf4Targets_de,  elf3Targets_de))
+mat=sapply(uniqueGenes, function(i){
+  sapply(list(lux17CTargets_de,  luxTargets_de, elf4Targets_de,  elf3Targets_de), function(j){
+    if(as.character(i) %in% as.character(j)){1}else{0}
+  })
+})
+binary=apply(mat, 2, function(i){paste(i[1], i[2], i[3], i[4], sep="")})
+table(binary)
+
+write.table(elf3Targets_de, file="goldStandardTargets_elf3.txt", quote=FALSE, row.names = FALSE, col.names = FALSE)
+write.table(elf4Targets_de, file="goldStandardTargets_elf4.txt", quote=FALSE, row.names = FALSE, col.names = FALSE)
+write.table(luxTargets_de, file="goldStandardTargets_lux.txt", quote=FALSE, row.names = FALSE, col.names = FALSE)
 
 
