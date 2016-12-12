@@ -498,6 +498,20 @@ mat_subset_ordered=mat_subset[order(mat_subset[,1], mat_subset[,2], mat_subset[,
 
 dev.off()
 
+pdf(paste("Figure_bedOverlaps_all_v4.pdf", sep=""), width=3, height=3,pointsize = 10) 
+par(mfrow=c(1,1));
+par(mar=c(4, 4, 2, 1)+0.1);
+par(cex=0.9)
+
+mat_ordered=mat[order(mat[,1], mat[,2], mat[,3], mat[,4]),]
+mat_ordered=mat_ordered[,c("bELF4", "bLUX", "bphyB_17", "bphyB_27")]
+heatmap(-mat_ordered, scale="none", labRow=NA, Colv=NA, Rowv=NA)
+mat_subset=mat[which(apply(mat, 1, function(i){sum(i)>0})),]
+mat_subset_ordered=mat_subset[order(mat_subset[,1], mat_subset[,2], mat_subset[,3], mat_subset[,4]),]
+
+
+dev.off()
+
 
 
 #############
